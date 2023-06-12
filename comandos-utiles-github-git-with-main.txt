@@ -1,0 +1,43 @@
+# Guia para vincular un proyecto local con un repositorio remoto en github sin romperse
+
+
+# En github, se crea el repositorio externo con rama principal "main"
+
+- se define la descripcion del curso/proyecto
+- publico
+- se agrega README
+- sin .gitignore
+- sin license
+
+
+# En la PC, se crea una carpeta con el mismo nombre del repositorio, es decir, py3-design-patterns
+
+# Dentro de la carpeta, se generaria el entorno virtual, en este caso, se usara "venv"
+$ python3.9 -m venv venv  # ojo con la version de python que quiera aplicar para el entorno virtual
+
+# se activa el entorno virtual:
+$ source venv/bin/activate
+
+# Inicializamos git teniendo presente las configuraciones globales (en mi caso, esta "dev" como rama por defecto)
+(venv) $ git config --global --list
+(venv) $ git init
+
+# definir el contenido del archivo .gitignore
+(venv) $ touch .gitignore
+
+# En local, se vincula el repositorio remoto al nuevo proyecto
+(venv) $ git remote add origin https://github.com/luis2ra/py3-design-patterns.git
+
+# actualizo los enlaces de los repositoris remotos (fetch/push)
+(venv) $ git remote update
+
+# En este paso, si no se ha hecho ningun commit, puedo jalar el README
+(venv) $ git merge origin/main
+
+# Se realizan los cambios y se sube la rama
+(venv) $ git add .
+(venv) $ git commit -m "upload changes"
+(venv) $ git push origin dev
+
+# En github, se hace un PR (dev --> main)
+
